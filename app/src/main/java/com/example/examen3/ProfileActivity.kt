@@ -20,22 +20,27 @@ class ProfileActivity : AppCompatActivity() {
         tvUltimaConexion = findViewById(R.id.tvUltimaConexion)
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
 
-        val nombreUsuario =
-            intent.getStringExtra("NOMBRE_USUARIO") ?: "Jugador"
-
+        val nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO") ?: "Jugador"
         tvNombreJugador.text = nombreUsuario
-        tvUltimaConexion.text = "Última conexión: ${obtenerFechaActual()}"
+
+        val dbHelper = DBHelper(this)
+        val ultimaConexionGuardada = dbHelper.obtenerUltimaConexion(nombreUsuario)
+
+        val fechaActual = obtenerFechaActual()
+        dbHelper.actualizarUltimaConexion(nombreUsuario, fechaActual)
+
+        tvUltimaConexion.text = if (ultimaConexionGuardada != null) {
+            "Última conexión: $ultimaConexionGuardada"
+        } else {
+            "Primera conexión"
+        }
 
         btnCerrarSesion.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Hasta pronto $nombreUsuario",
-                Toast.LENGTH_SHORT
-            ).show()
-
+            Toast.makeText(this, "Hasta pronto $nombreUsuario", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
+
 
     private fun obtenerFechaActual(): String {
         return java.text.SimpleDateFormat(

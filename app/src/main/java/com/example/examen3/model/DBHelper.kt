@@ -14,6 +14,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_ID = "id"
         const val COLUMN_NOMBRE = "nombre"
         const val COLUMN_CONTRASENA = "contrasena"
+        const val COLUMN_ULTIMA_CONEXION = "ultimaConexion"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -21,7 +22,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             CREATE TABLE $TABLE_JUGADOR (
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_NOMBRE TEXT NOT NULL,
-                $COLUMN_CONTRASENA TEXT NOT NULL
+                $COLUMN_CONTRASENA TEXT NOT NULL,
+                $COLUMN_ULTIMA_CONEXION TEXT
             )
         """.trimIndent()
         db.execSQL(createTable)
@@ -42,6 +44,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         db.close()
         return result != -1L
     }
+
     fun validarCredenciales(nombre: String, contrasena: String): Boolean {
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_JUGADOR WHERE $COLUMN_NOMBRE=? AND $COLUMN_CONTRASENA=?"
@@ -52,4 +55,30 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         return existe
     }
 
+    fun actualizarUltimaConexion(nombre: String, fecha: String) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_ULTIMA_CONEXION, fecha)
+        }
+        db.update(TABLE_JUGADOR, values, "$COLUMN_NOMBRE=?", arrayOf(nombre))
+        db.close()
+    }
+
+    fun obtenerUltimaConexion(nombre: String): String? {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_JUGADOR,
+            arrayOf(COLUMN_ULTIMA_CONEXION),
+            "$COLUMN_NOMBRE=?",
+            arrayOf(nombre),
+            null, null, null
+        )
+        var ultimaConexion: String? = null
+        if (cursor.moveToFirst()) {
+            ultimaConexion = cursor.getString(0)
+        }
+        cursor.close()
+        db.close()
+        return ultimaConexion
+    }
 }
