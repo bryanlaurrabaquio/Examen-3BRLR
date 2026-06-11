@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTituloPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil del Jugador"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+        <ImageView
+            android:id="@+id/ivFotoPerfil"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@android:drawable/ic_menu_myplaces"
+            android:contentDescription="Foto de perfil"/>
+
+        <TextView
+            android:id="@+id/tvNombreJugador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jugador"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvUltimaConexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Última conexión:"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrar Sesión"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
