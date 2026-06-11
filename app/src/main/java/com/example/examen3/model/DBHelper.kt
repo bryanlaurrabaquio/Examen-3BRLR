@@ -73,6 +73,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             arrayOf(nombre),
             null, null, null
         )
+
         var ultimaConexion: String? = null
         if (cursor.moveToFirst()) {
             ultimaConexion = cursor.getString(0)
@@ -80,5 +81,17 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         cursor.close()
         db.close()
         return ultimaConexion
+    }
+
+    fun existeJugador(nombre: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_JUGADOR,
+            arrayOf(COLUMN_ID),
+            "$COLUMN_NOMBRE=?",
+            arrayOf(nombre),
+            null, null, null
+        )
+        return TODO("Provide the return value")
     }
 }
