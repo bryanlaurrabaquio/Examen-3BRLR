@@ -23,23 +23,32 @@
 
     <EditText
         android:id="@+id/etUsuario"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Usuario" />
+        android:hint="@string/usuario"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
-        android:id="@+id/etContrasena"
-        android:layout_width="match_parent"
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword" />
+        app:layout_constraintTop_toBottomOf="@id/etUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/btnIniciarSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesión" />
-
+        android:text="@string/iniciar_sesion"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/tvPreguntaRegistro"
@@ -58,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Registrar"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/tvPreguntaRegistro"
         app:layout_constraintStart_toStartOf="parent"
