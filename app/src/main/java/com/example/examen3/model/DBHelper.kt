@@ -42,4 +42,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         db.close()
         return result != -1L
     }
+    fun validarCredenciales(nombre: String, contrasena: String): Boolean {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_JUGADOR WHERE $COLUMN_NOMBRE=? AND $COLUMN_CONTRASENA=?"
+        val cursor = db.rawQuery(query, arrayOf(nombre, contrasena))
+        val existe = cursor.count > 0
+        cursor.close()
+        db.close()
+        return existe
+    }
+
 }
