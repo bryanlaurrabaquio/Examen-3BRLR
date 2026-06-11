@@ -1,4 +1,4 @@
-package com.example.tuapp
+package com.example.examen3.model
 
 import android.content.ContentValues
 import android.content.Context
